@@ -13,9 +13,14 @@ const TodoListItem = ({index, item, toggleCompleted, deleteTodoItem, updateTodoT
        height: "30px"
     }
 
+    const TodoDivStyling = {
+        borderColor: item.completed ? 'green' : 'red'
+        
+    }
 
-    const handleCompletedChange = (e) => {
-        toggleCompleted(index, !e.target.defaultChecked)
+
+    const handleCompletedChange = () => {
+        toggleCompleted(index, !item.completed)
     }
     
     const handleDelete = () => {
@@ -28,10 +33,10 @@ const TodoListItem = ({index, item, toggleCompleted, deleteTodoItem, updateTodoT
     }
 
     return (
-        <div className="border border-cyan-500 border-4 p-5 font-sans">
+        <div className="p-5 border border-4 font-sans" style={TodoDivStyling}>
             <input value={todoValue} type="text" className="text-center w-full outline-none focus:border border-cyan-500 cursor-pointer" onChange={(e) => {handleItemTextChange(e)}}/>
             <div className="flex flex-row justify-center">
-                <input style={CheckboxStyling} className="cursor-pointer items-center" type="checkbox" checked={item.completed} onChange={(e) => {handleCompletedChange(e)}}/>
+                <input style={CheckboxStyling} className="cursor-pointer items-center" type="checkbox" checked={item.completed} onChange={() =>{handleCompletedChange()}}/>
                 <Delete className="cursor-pointer ml-2 items-center text-cyan-500" onClick={handleDelete} style={DeleteStyling}/>
             </div>
         </div>
